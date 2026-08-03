@@ -38,14 +38,14 @@
 
     <a-scene mindar-image="imageTargetSrc: ./targets/targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       
-      <!-- כאן עשינו שינוי: הוספנו webkit-playsinline ושינינו ל-preload="none" -->
+      <!-- הוספנו muted כדי למנוע חסימות דפדפן, והשארנו preload="none" למניעת קריסת זיכרון -->
       <a-assets>
-        <video id="vid1" src="./videos/video1.mp4" loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
-        <video id="vid2" src="./videos/video2.mp4" loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
-        <video id="vid3" src="./videos/video3.mp4" loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
-        <video id="vid4" src="./videos/video4.mp4" loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
-        <video id="vid5" src="./videos/video5.mp4" loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
-        <video id="vid6" src="./videos/video6.mp4" loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
+        <video id="vid1" src="./videos/video1.mp4" muted loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
+        <video id="vid2" src="./videos/video2.mp4" muted loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
+        <video id="vid3" src="./videos/video3.mp4" muted loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
+        <video id="vid4" src="./videos/video4.mp4" muted loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
+        <video id="vid5" src="./videos/video5.mp4" muted loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
+        <video id="vid6" src="./videos/video6.mp4" muted loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -83,25 +83,17 @@
         const targets = document.querySelectorAll('.clickable-target');
         const videos = document.querySelectorAll('video');
 
+        // לחיצה על הכפתור רק מסתירה את המסך השחור - בלי להקריס את המצלמה
         startButton.addEventListener('click', function() {
           uiContainer.style.display = 'none';
-          
-          videos.forEach(video => {
-            let playPromise = video.play();
-            if (playPromise !== undefined) {
-              playPromise.then(() => {
-                video.pause();
-              }).catch(error => {
-                console.warn("Video unlock safely handled: ", error);
-              });
-            }
-          });
         });
 
+        // הפעלת הוידאו רק כשהתמונה מזוהה בפועל
         targets.forEach((target, index) => {
           const video = videos[index];
           
           target.addEventListener("targetFound", event => {
+            console.log("Found target", index);
             let playPromise = video.play();
             if (playPromise !== undefined) {
               playPromise.catch(error => {
@@ -111,6 +103,7 @@
           });
           
           target.addEventListener("targetLost", event => {
+            console.log("Lost target", index);
             video.pause();
           });
         });
