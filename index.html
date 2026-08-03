@@ -1,3 +1,359 @@
+
+Gemini
+
+Chat
+
+Spark
+beta
+New chat
+Search chats
+Images
+Videos
+Library
+Gems
+New notebook
+Theory of the Dérive
+The Art and Science of Interactive Infographic Design
+All notebooks
+Build WebAR App With MindAR
+Verifying Academic References
+עבודה עם תחמוצות על קרמיקה משולבת
+Copepod Diapause Research Article Details
+Como Apartment Search: Best Price, Reviews
+המרת מסמך עברי ל-Word
+SolidWorks Document Manager Error Fix
+Creating Motion Animation From Image
+Mixed-Media Poster Redesign with Linocuts
+Poster Redesign With New Central Image
+Replacing Person in Image
+החלפת כותרת בפונט יצירתי ומודרני
+החלפת כותרת בפונט יצירתי
+Image Generation Prompts for Craft Object
+הצעות לשיפור תמונה ועיבוד
+Como Accommodations: Budget-Friendly Options
+Banner Graphics Replacement And Text Correction
+דירוג כתבי עת בספרות ילדים
+Buying Used High-Lumen Projectors
+מיתוסים על בעלי חיים והאמת
+Clothing Swap Between Woman and Mannequin
+Revert Large Icons On Android
+חישוב זווית הקרנת מקרן
+AR Game Development Based On Image
+Hebrew to English Design Course Translation
+Airbrush Not Working: Troubleshooting Guide
+GitHub Actions Deployment Workflow Status
+Understanding CI/CD Workflow Status
+שמות לסרטוני הדרכה באפליקציה
+A-Frame Canvas: בעיות מיקום ורינדור
+Hebrew Animation "עם ישראל חי"
+Conversation with Gemini
+i want to create a small ar app, you scan the qr of the and than there are 6 diffrent images each one of them has a coresponding video
+
+This is a perfect use case for WebAR (Web-based Augmented Reality). By using WebAR, your users won't need to download an app from an app store—they just scan your QR code, which opens a web page, asks for camera permission, and immediately starts scanning for the images.
+
+To build this for free, the best tool is MindAR, an open-source web augmented reality library that integrates perfectly with A-Frame (a web framework for building 3D/AR experiences).
+
+Here is the exact roadmap to build this.
+
+1
+Prepare Your Assets
+Keep files small for web performance
+You need your 6 trigger images and 6 corresponding videos.
+
+Images: Make sure they have high contrast and lots of unique details (flat colors or simple text don't track well). Standard .jpg or .png works best.
+
+Videos: Compress them heavily. Mobile browsers struggle with massive video files. Aim for .mp4 files under 5MB each.
+
+2
+Compile the Image Targets
+Convert images into tracking data
+MindAR needs to "learn" your images to track them.
+
+Go to the MindAR Image Target Compiler.
+
+Upload all 6 of your images at once.
+
+Click Start.
+
+Once finished, download the compiled .mind file (e.g., targets.mind). This single file contains the tracking data for all 6 images. The first image you uploaded is index 0, the second is 1, and so on up to 5.
+
+3
+Write the WebAR Code
+Link targets to videos
+Create an index.html file. You will use A-Frame and MindAR to link your tracking file (targets.mind) to your videos.
+
+Here is the basic structure you'll need:
+
+HTML
+
+  
+    
+    
+    
+  
+  
+    
+    
+      
+      
+        
+        
+        
+      
+
+      
+
+      
+      
+        
+        
+      
+
+      
+      
+        
+      
+
+      
+      
+    
+  
+
+Note: Browsers require user interaction to autoplay video with sound. You may need to add a "Tap to Start" button overlay in your final code to trigger the video play events.
+
+4
+Host Your AR App
+Must be HTTPS
+Because this uses the device camera, your site must be hosted on a secure https:// connection.
+
+Upload your index.html, targets.mind, and your 6 .mp4 videos to a free host like GitHub Pages, Vercel, or Netlify.
+
+5
+Create the QR Code
+Once your site is live, grab the URL (e.g., [https://my-ar-app.netlify.app](https://my-ar-app.netlify.app)). Paste that URL into any free QR code generator.
+
+Now, when users scan the QR code, it opens the website, activates the camera, and plays the correct video when they point it at one of your 6 images.
+
+Want me to write the full JavaScript for the 'Tap to start' video playback?
+
+Yes
+i uploaded the mind file here: C:\Users\Doron.Oryan\Documents\GitHub\lenny\targets\targets.mind
+
+Perfect. Since your .mind file is located at ...\GitHub\lenny\targets\targets.mind, it looks like you are building this inside a GitHub repository folder named lenny.
+
+Because browsers have strict security rules about camera access and loading 3D files, you cannot just double-click an index.html file to test this.
+
+Here is exactly how to set up your folder and code to make it work.
+
+1
+Structure Your Project
+Organize your root folder
+Inside your lenny folder, create your index.html file and a place for your videos. Your folder structure should look exactly like this:
+
+Plaintext
+lenny/
+├── index.html
+├── targets/
+│   └── targets.mind
+└── videos/
+    ├── video1.mp4
+    ├── video2.mp4
+    └── (videos 3-6)
+2
+Update Your HTML Code
+Update the file paths
+Open your index.html file and paste the code below. Notice that the imageTargetSrc now points to ./targets/targets.mind, and the videos point to the ./videos/ folder.
+
+HTML
+
+  
+    
+    
+    
+  
+  
+    
+      
+      
+        
+        
+        
+      
+
+      
+
+      
+        
+      
+
+      
+        
+      
+      
+      
+    
+  
+
+3
+Run a Local Server
+Bypass browser security blocks
+To test this on your computer, you must run a local web server.
+
+If you use VS Code: Install the Live Server extension, right-click your index.html, and select "Open with Live Server".
+
+If you use Python: Open your terminal, navigate to your lenny folder, and type python -m http.server 8000. Then open your browser to http://localhost:8000.
+
+(Note: Your webcam will turn on, and you can hold your images up to your computer screen to test the tracking.)
+
+4
+Push to GitHub Pages
+Publish for mobile testing
+To actually scan the QR code and test it on your phone, your phone needs an https:// link. Since you are already in a GitHub folder:
+
+Commit and push your code to GitHub.
+
+Go to your repository settings on GitHub.com.
+
+Navigate to Pages on the left sidebar.
+
+Under "Branch", select main (or master) and click Save.
+
+In a few minutes, GitHub will give you a live HTTPS link (e.g., [https://yourusername.github.io/lenny/](https://yourusername.github.io/lenny/)). You can use this link for your QR code!
+
+Want to add the script to fix mobile video playback?
+
+Yes
+where is the html content?
+
+You need to create the HTML file yourself inside your lenny folder. It doesn't exist yet until you make it!
+
+Here is exactly how to create it and where to put it:
+
+1
+Open a text editor
+Open a code editor like VS Code, or just use Notepad on your computer.
+
+2
+Copy and paste the code
+Paste this exact HTML code into your empty file:
+
+HTML
+
+  
+    
+    
+    
+  
+  
+    
+    
+      
+      
+        
+        
+        
+      
+
+      
+
+      
+        
+      
+
+      
+        
+      
+      
+      
+    
+  
+
+3
+Save the file in your folder
+Go to File > Save As and save it to this exact location:
+C:\Users\Doron.Oryan\Documents\GitHub\lenny\index.html
+
+(Make sure the file name is exactly index.html and not index.html.txt!)
+
+Once you save that file, your lenny folder will have the HTML content it needs to run the WebAR experience.
+
+can you create the index.html for me?
+
+I can't directly create or save the file to your computer because, as an AI, I don't have access to your local hard drive or file system.
+
+However, I have written out the complete code for you below, with all 6 videos fully mapped out so you don't have to fill in any blanks.
+
+All you have to do is copy this entire block, paste it into a blank Notepad file, and save it as index.html inside your lenny folder.
+
+HTML
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-aframe.prod.js"></script>
+  </head>
+  <body>
+    <!-- This points to your specific .mind file path -->
+    <a-scene mindar-image="imageTargetSrc: ./targets/targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      
+      <!-- Your 6 Videos -->
+      <a-assets>
+        <video id="vid1" src="./videos/video1.mp4" loop crossorigin="anonymous" playsinline></video>
+        <video id="vid2" src="./videos/video2.mp4" loop crossorigin="anonymous" playsinline></video>
+        <video id="vid3" src="./videos/video3.mp4" loop crossorigin="anonymous" playsinline></video>
+        <video id="vid4" src="./videos/video4.mp4" loop crossorigin="anonymous" playsinline></video>
+        <video id="vid5" src="./videos/video5.mp4" loop crossorigin="anonymous" playsinline></video>
+        <video id="vid6" src="./videos/video6.mp4" loop crossorigin="anonymous" playsinline></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- Linking targets to videos -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-video src="#vid1" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-video src="#vid2" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 2">
+        <a-video src="#vid3" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 3">
+        <a-video src="#vid4" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 4">
+        <a-video src="#vid5" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 5">
+        <a-video src="#vid6" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+      
+    </a-scene>
+  </body>
+</html>
+How do I get the videos to play on mobile?
+
+Yes
+Mobile browsers block autoplaying videos. Can you give me the JavaScript code to add a 'Tap to Start' button so the videos actually play?
+
+You hit on the exact reason most WebAR projects fail on mobile—browsers strictly enforce a "user gesture" (like a tap or click) before they allow media with sound to play.
+
+To fix this, we need to add three things to your file:
+
+A full-screen UI overlay with a Start button.
+
+CSS to style the overlay so it sits on top of the camera.
+
+JavaScript that waits for the click, unlocks the video permissions, and—even better—tells the specific video to play only when its matching image is scanned, and pause when the image is lost.
+
+Replace everything in your index.html with this updated code. I have combined the HTML, CSS, and JS all into this one file for you:
+
+HTML
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -115,3 +471,595 @@
     </script>
   </body>
 </html>
+How this code works
+The Unlock: When the user taps "Tap to Start AR", the JavaScript loops through all 6 videos, calls play(), and immediately calls pause(). To the user, nothing happens, but the browser registers that a user explicitly allowed video playback.
+
+The Tracking: The script attaches targetFound and targetLost listeners to your image targets. When the camera sees Image #2, Video #2 plays. When they move the camera away, Video #2 pauses so it doesn't keep running in the background.
+
+how do i make my git public?
+
+1
+Open your repository on GitHub
+Go to GitHub.com, log in, and navigate to your lenny repository.
+
+2
+Go to Settings
+The gear icon near the top right
+Click on the Settings tab located in the top menu bar of your repository (right below your repository name).
+
+3
+Find the Danger Zone
+Scroll all the way to the bottom
+Stay on the default "General" settings page and scroll down to the very bottom until you see a section outlined in red called the Danger Zone.
+
+4
+Change Visibility
+Find the setting labeled Change repository visibility and click the button next to it.
+
+5
+Confirm Public Access
+Select Change to public. GitHub will ask you to confirm by typing your repository name or clicking a confirmation button.
+
+Note on GitHub Pages: If you are using a free GitHub account, your repository must be public for GitHub Pages to host your AR app. Once you complete these steps, your [https://yourusername.github.io/lenny/](https://yourusername.github.io/lenny/) link will be able to go live.
+
+and in github pages what do i need to do?
+
+Now that your repository is public, setting up GitHub Pages is how you turn that code into a live website you can scan with a QR code.
+
+Here is exactly how to turn it on:
+
+1
+Open Repository Settings
+On GitHub.com
+Navigate back to your lenny repository on GitHub and click the Settings tab at the top (the gear icon).
+
+2
+Go to Pages
+Look at the left-hand menu
+On the left sidebar, scroll down to the "Code and automation" section and click on Pages.
+
+3
+Select your Branch
+Tell GitHub where your code is
+Under the "Build and deployment" section:
+
+Look for the Branch heading.
+
+Click the dropdown that says None and change it to main (or master, depending on what your default branch is called).
+
+Leave the folder dropdown next to it as / (root).
+
+Click the Save button.
+
+4
+Wait for the Deployment
+It takes 1 to 3 minutes
+Once you click Save, GitHub starts building your site.
+
+Go to the top of your main repository page and look for an orange dot next to your latest commit. This means it is building.
+
+When it turns into a green checkmark, your site is live!
+
+5
+Get your URL
+Refresh the Settings > Pages page. At the very top, you will now see a box that says:
+"Your site is live at [https://yourusername.github.io/lenny/](https://yourusername.github.io/lenny/)"
+
+Copy that exact URL and paste it into any free QR code generator. Your WebAR app is now fully functional!
+
+when i click the tap to scan, the image is stuck, and does not continue the fedd from the camera
+
+When the camera feed freezes the exact moment you tap the button, it is almost always caused by a JavaScript crash.
+
+When the code tries to play() and immediately pause() all 6 videos at the exact same millisecond, mobile browsers (especially Safari on iPhones) will throw a "Promise Rejection" error. This error crashes the background loop that updates your camera feed, freezing the image on your screen.
+
+To fix this, we need to handle the video unlocking safely so it doesn't crash the browser. We should also tell the browser not to download all 6 videos at once, which can choke a phone's memory.
+
+Here is how to fix it:
+
+1
+Update your video tags
+In your index.html, find your <a-assets> section. Add preload="metadata" to every video. This stops the phone from trying to load all the heavy video files at once.
+
+HTML
+
+  
+  
+  
+  
+  
+  
+
+2
+Replace the JavaScript block
+Scroll to the very bottom of your index.html file and replace the entire <script> ... </script> section with this new version. This version safely catches the media errors so the camera loop doesn't crash.
+
+JavaScript
+
+3
+Commit and Push
+Wait a couple of minutes for GitHub to rebuild
+Save the index.html file, commit the changes to your GitHub repository, and push them. Give GitHub Pages a minute or two to update the live site, then refresh the page on your phone and try scanning again.
+
+Note on performance: If it still stutters after this fix, check the file sizes of your .mp4 files. Mobile AR is very heavy on the phone's processor. Your videos should ideally be compressed to under 2MB–3MB each.
+
+please create the whole html file
+
+Here is the complete, updated index.html file with the safe video unlocking and preloading fixes applied.
+
+You can copy this entire block, replace everything inside your current index.html file, save it, and push it to GitHub.
+
+HTML
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-aframe.prod.js"></script>
+    
+    <style>
+      /* Styles for the Tap to Start overlay */
+      #ui-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Keeps it on top of the AR camera */
+      }
+      #start-button {
+        padding: 15px 30px;
+        font-size: 20px;
+        font-family: sans-serif;
+        font-weight: bold;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <!-- Tap to Start UI -->
+    <div id="ui-container">
+      <button id="start-button">Tap to Start AR</button>
+    </div>
+
+    <!-- Your AR Scene -->
+    <a-scene mindar-image="imageTargetSrc: ./targets/targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      
+      <!-- Video Assets with preload metadata to save memory -->
+      <a-assets>
+        <video id="vid1" src="./videos/video1.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid2" src="./videos/video2.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid3" src="./videos/video3.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid4" src="./videos/video4.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid5" src="./videos/video5.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid6" src="./videos/video6.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <!-- Targets 1 through 6 -->
+      <a-entity mindar-image-target="targetIndex: 0" class="clickable-target">
+        <a-video src="#vid1" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 1" class="clickable-target">
+        <a-video src="#vid2" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 2" class="clickable-target">
+        <a-video src="#vid3" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 3" class="clickable-target">
+        <a-video src="#vid4" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 4" class="clickable-target">
+        <a-video src="#vid5" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 5" class="clickable-target">
+        <a-video src="#vid6" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+      
+    </a-scene>
+
+    <!-- Safe Video Unlocking Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const uiContainer = document.getElementById('ui-container');
+        const startButton = document.getElementById('start-button');
+        const targets = document.querySelectorAll('.clickable-target');
+        const videos = document.querySelectorAll('video');
+
+        // 1. When the user taps the button
+        startButton.addEventListener('click', function() {
+          // Hide the UI
+          uiContainer.style.display = 'none';
+          
+          // Safely unlock videos without crashing the browser thread
+          videos.forEach(video => {
+            let playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.then(() => {
+                video.pause();
+              }).catch(error => {
+                console.warn("Video unlock safely handled: ", error);
+              });
+            }
+          });
+        });
+
+        // 2. Play the correct video only when its image is scanned
+        targets.forEach((target, index) => {
+          const video = videos[index];
+          
+          target.addEventListener("targetFound", event => {
+            console.log("Found target", index);
+            let playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(error => {
+                console.warn("Playback prevented:", error);
+              });
+            }
+          });
+          
+          target.addEventListener("targetLost", event => {
+            console.log("Lost target", index);
+            video.pause();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
+בוא ננסה לבנות את זה מחדש
+
+בשמחה. לפעמים הכי טוב לנקות הכל, להתחיל מלוח חלק ולעשות את זה נכון צעד אחר צעד.
+
+הנה המדריך המלא לבניית האפליקציה מההתחלה, כולל כל התיקונים שעשינו (כפתור ההפעלה שמונע חסימה בדפדפנים וקוד בטוח שמונע קריסות).
+
+1
+שלב 1: סידור מבנה התיקיות
+הבסיס להכל
+בתוך תיקיית הפרויקט שלך (lenny), ודא שהמבנה נראה בדיוק ככה. חשוב ששמות התיקיות יהיו באותיות קטנות ושמות הסרטונים יתאימו לקוד:
+
+Plaintext
+lenny/
+├── index.html
+├── targets/
+│   └── targets.mind
+└── videos/
+    ├── video1.mp4
+    ├── video2.mp4
+    ├── video3.mp4
+    ├── video4.mp4
+    ├── video5.mp4
+    └── video6.mp4
+2
+שלב 2: יצירת קובץ ה-mind.
+חיבור התמונות למערכת
+היכנס ל-MindAR Compiler.
+
+העלה את כל 6 התמונות שלך ביחד (לפי הסדר: תמונה 1 תהיה וידאו 1, וכו').
+
+לחץ על Start וחכה שיסיים.
+
+הורד את הקובץ שנוצר (הוא ייקרא targets.mind) והכנס אותו לתוך תיקיית targets שיצרת בשלב הקודם.
+
+3
+שלב 3: קוד ה-HTML
+הקוד המלא והמעודכן
+פתח את הקובץ index.html שלך, תמחק את כל מה שיש בו, והדבק פנימה את הקוד הבא. (שמתי לך בכפתור טקסט בעברית - "לחץ כדי להתחיל").
+
+HTML
+
+  
+    
+    
+    
+    
+    
+  
+  
+    
+    
+    
+
+      לחץ כדי להתחיל
+    
+
+
+    
+    
+      
+      
+      
+        
+        
+        
+        
+        
+        
+      
+
+      
+
+      
+      
+        
+      
+
+      
+        
+      
+
+      
+        
+      
+
+      
+        
+      
+
+      
+        
+      
+
+      
+        
+      
+      
+    
+
+    
+    
+  
+
+4
+שלב 4: העלאה ל-GitHub
+Commit & Push
+שמור את קובץ ה-index.html.
+
+בצע Commit לשינויים ב-GitHub ודחוף (Push) את הקוד לשרת.
+
+המתן כ-2-3 דקות כדי ש-GitHub Pages יתעדכן.
+
+רענן את הקישור שלך בטלפון (ה-URL של GitHub Pages), לחץ על הכפתור ונסה לסרוק תמונה.
+
+אין קוד בקובץ
+
+אני מבין. מכיוון שאני בינה מלאכותית, אין לי גישה ישירה לתיקיות במחשב שלך כדי לכתוב את הקוד לתוך הקובץ בעצמי. הקובץ כרגע ריק כי צריך להכניס אליו את התוכן ידנית.
+
+כדי שהקוד יהיה בתוך הקובץ, עליך לבצע את הפעולות הבאות:
+
+1
+פתח את הקובץ בעורך טקסט
+Notepad או VS Code
+גש לתיקיית lenny במחשב שלך. לחץ כפתור ימני על הקובץ index.html ובחר Open with (פתח באמצעות) ואז בחר ב-Notepad (פנקס רשימות) או ב-VS Code (אם מותקן לך).
+
+2
+העתק את הקוד
+העתק את כל בלוק הקוד שמופיע כאן למטה:
+
+HTML
+
+  
+    
+    
+    
+    
+    
+  
+  
+    
+    
+
+      לחץ כדי להתחיל
+    
+
+
+    
+      
+      
+        
+        
+        
+        
+        
+        
+      
+
+      
+
+      
+        
+      
+
+      
+        
+      
+
+      
+        
+      
+
+      
+        
+      
+
+      
+        
+      
+
+      
+        
+      
+      
+    
+
+    
+  
+
+3
+הדבק ושמור
+Ctrl + S
+הדבק את הקוד בתוך עורך הטקסט ושמור את הקובץ (ב-Notepad, לחץ על File > Save). עכשיו הקובץ שלך כבר לא ריק.
+
+4
+דחוף חזרה ל-GitHub
+עכשיו כשהקוד נמצא בקובץ, עשה Commit לשינויים ב-GitHub ודחוף אותם למעלה (Push). לאחר כ-2 דקות האתר המעודכן שלך יפעל.
+
+צור בעבורי קובץ להורדה
+
+Your HTML file is ready for download:
+
+HTML icon
+index
+ HTML 
+Open
+הכנתי עבורך את הקובץ index.html עם כל הקוד המלא (כולל התיקונים לסרטונים והכפתור בעברית).
+
+כל מה שאתה צריך לעשות עכשיו זה:
+
+להוריד את הקובץ מהקישור למעלה.
+
+להעביר אותו לתוך תיקיית lenny שלך במחשב (שיחליף את הקובץ הריק הקיים שם).
+
+לעשות Commit ו-Push ל-GitHub!
+
+
+
+
+Gemini is AI and can make mistakes.
+
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.1/dist/mindar-image-aframe.prod.js"></script>
+    
+    <style>
+      #ui-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      #start-button {
+        padding: 15px 30px;
+        font-size: 20px;
+        font-family: sans-serif;
+        font-weight: bold;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div id="ui-container">
+      <button id="start-button">לחץ כדי להתחיל</button>
+    </div>
+
+    <a-scene mindar-image="imageTargetSrc: ./targets/targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      
+      <a-assets>
+        <video id="vid1" src="./videos/video1.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid2" src="./videos/video2.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid3" src="./videos/video3.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid4" src="./videos/video4.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid5" src="./videos/video5.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid6" src="./videos/video6.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+      </a-assets>
+
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+      <a-entity mindar-image-target="targetIndex: 0" class="clickable-target">
+        <a-video src="#vid1" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 1" class="clickable-target">
+        <a-video src="#vid2" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 2" class="clickable-target">
+        <a-video src="#vid3" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 3" class="clickable-target">
+        <a-video src="#vid4" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 4" class="clickable-target">
+        <a-video src="#vid5" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 5" class="clickable-target">
+        <a-video src="#vid6" width="1" height="0.55" position="0 0 0"></a-video>
+      </a-entity>
+      
+    </a-scene>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const uiContainer = document.getElementById('ui-container');
+        const startButton = document.getElementById('start-button');
+        const targets = document.querySelectorAll('.clickable-target');
+        const videos = document.querySelectorAll('video');
+
+        startButton.addEventListener('click', function() {
+          uiContainer.style.display = 'none';
+          
+          videos.forEach(video => {
+            let playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.then(() => {
+                video.pause();
+              }).catch(error => {
+                console.warn("Video unlock safely handled: ", error);
+              });
+            }
+          });
+        });
+
+        targets.forEach((target, index) => {
+          const video = videos[index];
+          
+          target.addEventListener("targetFound", event => {
+            let playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(error => {
+                console.warn("Playback prevented:", error);
+              });
+            }
+          });
+          
+          target.addEventListener("targetLost", event => {
+            video.pause();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
+index.html
+Displaying index.html.
