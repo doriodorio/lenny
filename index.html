@@ -41,17 +41,19 @@
     <!-- Your AR Scene -->
     <a-scene mindar-image="imageTargetSrc: ./targets/targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       
+      <!-- Video Assets with preload metadata to save memory -->
       <a-assets>
-        <video id="vid1" src="./videos/video1.mp4" loop crossorigin="anonymous" playsinline></video>
-        <video id="vid2" src="./videos/video2.mp4" loop crossorigin="anonymous" playsinline></video>
-        <video id="vid3" src="./videos/video3.mp4" loop crossorigin="anonymous" playsinline></video>
-        <video id="vid4" src="./videos/video4.mp4" loop crossorigin="anonymous" playsinline></video>
-        <video id="vid5" src="./videos/video5.mp4" loop crossorigin="anonymous" playsinline></video>
-        <video id="vid6" src="./videos/video6.mp4" loop crossorigin="anonymous" playsinline></video>
+        <video id="vid1" src="./videos/video1.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid2" src="./videos/video2.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid3" src="./videos/video3.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid4" src="./videos/video4.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid5" src="./videos/video5.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
+        <video id="vid6" src="./videos/video6.mp4" loop crossorigin="anonymous" playsinline preload="metadata"></video>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
+      <!-- Targets 1 through 6 -->
       <a-entity mindar-image-target="targetIndex: 0" class="clickable-target">
         <a-video src="#vid1" width="1" height="0.55" position="0 0 0"></a-video>
       </a-entity>
@@ -78,6 +80,7 @@
       
     </a-scene>
 
+    <!-- Safe Video Unlocking Script -->
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         const uiContainer = document.getElementById('ui-container');
@@ -90,10 +93,16 @@
           // Hide the UI
           uiContainer.style.display = 'none';
           
-          // Briefly play and pause all videos to unlock mobile browser media engines
+          // Safely unlock videos without crashing the browser thread
           videos.forEach(video => {
-            video.play();
-            video.pause();
+            let playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.then(() => {
+                video.pause();
+              }).catch(error => {
+                console.warn("Video unlock safely handled: ", error);
+              });
+            }
           });
         });
 
@@ -103,7 +112,12 @@
           
           target.addEventListener("targetFound", event => {
             console.log("Found target", index);
-            video.play();
+            let playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(error => {
+                console.warn("Playback prevented:", error);
+              });
+            }
           });
           
           target.addEventListener("targetLost", event => {
