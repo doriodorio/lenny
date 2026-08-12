@@ -39,15 +39,15 @@
   </head>
   <body>
     
-    <!-- מסך הפתיחה עם כפתור ומספר גרסה -->
+    <!-- מסך הפתיחה -->
     <div id="ui-container">
       <button id="start-button">לחץ כדי להתחיל</button>
-      <div id="version-number">גרסה 2.2</div>
+      <div id="version-number">גרסה 2.3 (עם טעינה)</div>
     </div>
 
     <a-scene mindar-image="imageTargetSrc: ./targets/targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       
-      <!-- הגדרת 11 הסרטונים (אין צורך לשנות פה כלום) -->
+      <!-- הגדרת 11 הסרטונים -->
       <a-assets>
         <video id="vid1" src="./videos/mov01.mp4" muted loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
         <video id="vid2" src="./videos/mov02.mp4" muted loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
@@ -64,61 +64,72 @@
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <!-- הקישורים החדשים של התמונות לסרטונים (פרופורציות אורך 1.417 נשמרו) -->
+      <!-- לכל מטרה הוספנו אייקון טעינה (spinner) וקבענו שהוידאו יהיה מוסתר (visible="false") כברירת מחדל -->
       
       <!-- תמונה 01 -> mov06 -->
       <a-entity mindar-image-target="targetIndex: 0" class="clickable-target">
-        <a-video src="#vid6" width="1" height="1.417" position="0 0 0"></a-video>
+        <a-entity class="spinner" geometry="primitive: ring; radiusInner: 0.15; radiusOuter: 0.25; thetaLength: 270" material="color: #ffffff; shader: flat" animation="property: rotation; to: 0 0 -360; loop: true; dur: 1000; easing: linear" position="0 0 0.01"></a-entity>
+        <a-video src="#vid6" width="1" height="1.417" position="0 0 0" visible="false"></a-video>
       </a-entity>
 
       <!-- תמונה 02 -> mov07 -->
       <a-entity mindar-image-target="targetIndex: 1" class="clickable-target">
-        <a-video src="#vid7" width="1" height="1.417" position="0 0 0"></a-video>
+        <a-entity class="spinner" geometry="primitive: ring; radiusInner: 0.15; radiusOuter: 0.25; thetaLength: 270" material="color: #ffffff; shader: flat" animation="property: rotation; to: 0 0 -360; loop: true; dur: 1000; easing: linear" position="0 0 0.01"></a-entity>
+        <a-video src="#vid7" width="1" height="1.417" position="0 0 0" visible="false"></a-video>
       </a-entity>
 
       <!-- תמונה 03 -> mov08 -->
       <a-entity mindar-image-target="targetIndex: 2" class="clickable-target">
-        <a-video src="#vid8" width="1" height="1.417" position="0 0 0"></a-video>
+        <a-entity class="spinner" geometry="primitive: ring; radiusInner: 0.15; radiusOuter: 0.25; thetaLength: 270" material="color: #ffffff; shader: flat" animation="property: rotation; to: 0 0 -360; loop: true; dur: 1000; easing: linear" position="0 0 0.01"></a-entity>
+        <a-video src="#vid8" width="1" height="1.417" position="0 0 0" visible="false"></a-video>
       </a-entity>
 
       <!-- תמונה 04 -> mov09 -->
       <a-entity mindar-image-target="targetIndex: 3" class="clickable-target">
-        <a-video src="#vid9" width="1" height="1.417" position="0 0 0"></a-video>
+        <a-entity class="spinner" geometry="primitive: ring; radiusInner: 0.15; radiusOuter: 0.25; thetaLength: 270" material="color: #ffffff; shader: flat" animation="property: rotation; to: 0 0 -360; loop: true; dur: 1000; easing: linear" position="0 0 0.01"></a-entity>
+        <a-video src="#vid9" width="1" height="1.417" position="0 0 0" visible="false"></a-video>
       </a-entity>
 
       <!-- תמונה 05 -> mov10 -->
       <a-entity mindar-image-target="targetIndex: 4" class="clickable-target">
-        <a-video src="#vid10" width="1" height="1.417" position="0 0 0"></a-video>
+        <a-entity class="spinner" geometry="primitive: ring; radiusInner: 0.15; radiusOuter: 0.25; thetaLength: 270" material="color: #ffffff; shader: flat" animation="property: rotation; to: 0 0 -360; loop: true; dur: 1000; easing: linear" position="0 0 0.01"></a-entity>
+        <a-video src="#vid10" width="1" height="1.417" position="0 0 0" visible="false"></a-video>
       </a-entity>
 
       <!-- תמונה 06 -> mov11 -->
       <a-entity mindar-image-target="targetIndex: 5" class="clickable-target">
-        <a-video src="#vid11" width="1" height="1.417" position="0 0 0"></a-video>
+        <a-entity class="spinner" geometry="primitive: ring; radiusInner: 0.15; radiusOuter: 0.25; thetaLength: 270" material="color: #ffffff; shader: flat" animation="property: rotation; to: 0 0 -360; loop: true; dur: 1000; easing: linear" position="0 0 0.01"></a-entity>
+        <a-video src="#vid11" width="1" height="1.417" position="0 0 0" visible="false"></a-video>
       </a-entity>
 
       <!-- תמונה 07 -> mov01 -->
       <a-entity mindar-image-target="targetIndex: 6" class="clickable-target">
-        <a-video src="#vid1" width="1" height="1.417" position="0 0 0"></a-video>
+        <a-entity class="spinner" geometry="primitive: ring; radiusInner: 0.15; radiusOuter: 0.25; thetaLength: 270" material="color: #ffffff; shader: flat" animation="property: rotation; to: 0 0 -360; loop: true; dur: 1000; easing: linear" position="0 0 0.01"></a-entity>
+        <a-video src="#vid1" width="1" height="1.417" position="0 0 0" visible="false"></a-video>
       </a-entity>
 
       <!-- תמונה 08 -> mov02 -->
       <a-entity mindar-image-target="targetIndex: 7" class="clickable-target">
-        <a-video src="#vid2" width="1" height="1.417" position="0 0 0"></a-video>
+        <a-entity class="spinner" geometry="primitive: ring; radiusInner: 0.15; radiusOuter: 0.25; thetaLength: 270" material="color: #ffffff; shader: flat" animation="property: rotation; to: 0 0 -360; loop: true; dur: 1000; easing: linear" position="0 0 0.01"></a-entity>
+        <a-video src="#vid2" width="1" height="1.417" position="0 0 0" visible="false"></a-video>
       </a-entity>
 
       <!-- תמונה 09 -> mov03 -->
       <a-entity mindar-image-target="targetIndex: 8" class="clickable-target">
-        <a-video src="#vid3" width="1" height="1.417" position="0 0 0"></a-video>
+        <a-entity class="spinner" geometry="primitive: ring; radiusInner: 0.15; radiusOuter: 0.25; thetaLength: 270" material="color: #ffffff; shader: flat" animation="property: rotation; to: 0 0 -360; loop: true; dur: 1000; easing: linear" position="0 0 0.01"></a-entity>
+        <a-video src="#vid3" width="1" height="1.417" position="0 0 0" visible="false"></a-video>
       </a-entity>
 
       <!-- תמונה 10 -> mov04 -->
       <a-entity mindar-image-target="targetIndex: 9" class="clickable-target">
-        <a-video src="#vid4" width="1" height="1.417" position="0 0 0"></a-video>
+        <a-entity class="spinner" geometry="primitive: ring; radiusInner: 0.15; radiusOuter: 0.25; thetaLength: 270" material="color: #ffffff; shader: flat" animation="property: rotation; to: 0 0 -360; loop: true; dur: 1000; easing: linear" position="0 0 0.01"></a-entity>
+        <a-video src="#vid4" width="1" height="1.417" position="0 0 0" visible="false"></a-video>
       </a-entity>
 
       <!-- תמונה 11 -> mov05 -->
       <a-entity mindar-image-target="targetIndex: 10" class="clickable-target">
-        <a-video src="#vid5" width="1" height="1.417" position="0 0 0"></a-video>
+        <a-entity class="spinner" geometry="primitive: ring; radiusInner: 0.15; radiusOuter: 0.25; thetaLength: 270" material="color: #ffffff; shader: flat" animation="property: rotation; to: 0 0 -360; loop: true; dur: 1000; easing: linear" position="0 0 0.01"></a-entity>
+        <a-video src="#vid5" width="1" height="1.417" position="0 0 0" visible="false"></a-video>
       </a-entity>
       
     </a-scene>
@@ -129,19 +140,27 @@
         const startButton = document.getElementById('start-button');
         const targets = document.querySelectorAll('.clickable-target');
 
-        // הסתרת מסך הפתיחה
         startButton.addEventListener('click', function() {
           uiContainer.style.display = 'none';
         });
 
-        // סקריפט מעודכן: עכשיו הוא מוצא את הוידאו הנכון לפי מה שהגדרת ב-HTML, ולא רק לפי סדר התמונות!
         targets.forEach((target) => {
-          // מושך את ה-ID של הוידאו ישירות מתוך התגית a-video שבתוך המטרה
           const videoElement = target.querySelector('a-video');
-          const videoId = videoElement.getAttribute('src').substring(1); // מוחק את ה-# כדי לקבל את ה-ID
+          const spinnerElement = target.querySelector('.spinner');
+          const videoId = videoElement.getAttribute('src').substring(1);
           const video = document.getElementById(videoId);
           
+          // האירוע הזה קופץ ברגע שהוידאו סיים לטעון מספיק נתונים כדי להתחיל להתנגן
+          video.addEventListener('playing', () => {
+            spinnerElement.setAttribute('visible', 'false');
+            videoElement.setAttribute('visible', 'true');
+          });
+
           target.addEventListener("targetFound", event => {
+            // ברגע שזיהינו תמונה, מציגים את הספינר ומסתירים את הוידאו
+            spinnerElement.setAttribute('visible', 'true');
+            videoElement.setAttribute('visible', 'false');
+            
             let playPromise = video.play();
             if (playPromise !== undefined) {
               playPromise.catch(error => {
@@ -152,6 +171,9 @@
           
           target.addEventListener("targetLost", event => {
             video.pause();
+            // מאפסים את התצוגה לפעם הבאה שיסרקו את התמונה
+            spinnerElement.setAttribute('visible', 'true');
+            videoElement.setAttribute('visible', 'false');
           });
         });
       });
