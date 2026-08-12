@@ -39,15 +39,13 @@
   </head>
   <body>
     
-    <!-- מסך הפתיחה -->
     <div id="ui-container">
       <button id="start-button">לחץ כדי להתחיל</button>
-      <div id="version-number">גרסה 2.3 (עם טעינה)</div>
+      <div id="version-number">גרסה 2.4 (תיקון לאייפון)</div>
     </div>
 
     <a-scene mindar-image="imageTargetSrc: ./targets/targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       
-      <!-- הגדרת 11 הסרטונים -->
       <a-assets>
         <video id="vid1" src="./videos/mov01.mp4" muted loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
         <video id="vid2" src="./videos/mov02.mp4" muted loop crossorigin="anonymous" playsinline webkit-playsinline preload="none"></video>
@@ -64,8 +62,6 @@
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <!-- לכל מטרה הוספנו אייקון טעינה (spinner) וקבענו שהוידאו יהיה מוסתר (visible="false") כברירת מחדל -->
-      
       <!-- תמונה 01 -> mov06 -->
       <a-entity mindar-image-target="targetIndex: 0" class="clickable-target">
         <a-entity class="spinner" geometry="primitive: ring; radiusInner: 0.15; radiusOuter: 0.25; thetaLength: 270" material="color: #ffffff; shader: flat" animation="property: rotation; to: 0 0 -360; loop: true; dur: 1000; easing: linear" position="0 0 0.01"></a-entity>
@@ -139,6 +135,9 @@
         const uiContainer = document.getElementById('ui-container');
         const startButton = document.getElementById('start-button');
         const targets = document.querySelectorAll('.clickable-target');
+        
+        // משתנה ששומר את הוידאו שפעיל כרגע כדי שנוכל לכבות אותו כשעוברים תמונה
+        let activeVideo = null;
 
         startButton.addEventListener('click', function() {
           uiContainer.style.display = 'none';
@@ -150,14 +149,19 @@
           const videoId = videoElement.getAttribute('src').substring(1);
           const video = document.getElementById(videoId);
           
-          // האירוע הזה קופץ ברגע שהוידאו סיים לטעון מספיק נתונים כדי להתחיל להתנגן
           video.addEventListener('playing', () => {
             spinnerElement.setAttribute('visible', 'false');
             videoElement.setAttribute('visible', 'true');
           });
 
           target.addEventListener("targetFound", event => {
-            // ברגע שזיהינו תמונה, מציגים את הספינר ומסתירים את הוידאו
+            // כיבוי ואיפוס מוחלט של כל וידאו אחר שפעל כדי לשחרר זיכרון באייפון
+            if (activeVideo && activeVideo !== video) {
+              activeVideo.pause();
+              activeVideo.currentTime = 0; // קריטי לאייפונים
+            }
+            activeVideo = video;
+
             spinnerElement.setAttribute('visible', 'true');
             videoElement.setAttribute('visible', 'false');
             
@@ -171,7 +175,9 @@
           
           target.addEventListener("targetLost", event => {
             video.pause();
-            // מאפסים את התצוגה לפעם הבאה שיסרקו את התמונה
+            // איפוס הוידאו להתחלה כשהוא יוצא מהפריים משחרר את הנעילה של מנוע המדיה
+            video.currentTime = 0; 
+            
             spinnerElement.setAttribute('visible', 'true');
             videoElement.setAttribute('visible', 'false');
           });
